@@ -1,9 +1,11 @@
-const fetch = require("node-fetch");
-const express = require("express");
+import fetch from "node-fetch";
+import express from "express";
+import dotenv from "dotenv";
 
-const app = express();
+dotenv.config();
+const app = express(); // Create an instance of the app object
 
-app.use(express.json());
+app.use(express.json()); // Use the express.json() middleware
 
 app.post("/angies-list/webhook", async (req, res) => {
   try {
@@ -59,11 +61,11 @@ app.post("/angies-list/webhook", async (req, res) => {
         Accept: "application/json",
       },
       body: new URLSearchParams({
-        client_id: "",
-        client_secret: "",
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
         grant_type: "authorization_code",
-        code: "",
-        refresh_token: "",
+        code: process.env.CODE,
+        refresh_token: process.env.REFRESH_TOKEN,
       }),
     };
 
